@@ -53,3 +53,16 @@ if (cityCount) {
   cityCount.textContent = cities.length;
 }
 
+const form = document.getElementById("contact-form");
+const formInfo = document.getElementById("form-info");
+
+if (form) {
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    formInfo.textContent = "Wiadomość została wysłana!";
+    formInfo.style.color = "green";
+
+    form.reset();
+  });
+}

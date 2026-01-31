@@ -17,21 +17,36 @@
   </header>
 
   <main>
-    <section>
-      <form id="contact-form">
+    <section class="hero">
+      <h2>Skontaktuj się z nami</h2>
+      <p>
+        Masz pomysł, sugestię lub pytanie? Napisz do nas – chętnie odpowiemy!
+      </p>
+    </section>
+
+    <section class="contact-wrapper">
+      <form id="contact-form" class="contact-form">
         <label>
-          Email:
-          <input type="email" id="email" required />
+          Email
+          <input type="email" id="email" placeholder="twój@email.com" required />
         </label>
+
         <label>
-          Wiadomość:
-          <textarea id="message" required></textarea>
+          Wiadomość
+          <textarea
+            id="message"
+            rows="5"
+            placeholder="Twoja wiadomość..."
+            required
+          ></textarea>
         </label>
-        <button type="submit">Wyślij</button>
+
+        <button type="submit" class="btn">Wyślij wiadomość</button>
+        <p id="form-info"></p>
       </form>
-      <p id="form-info"></p>
     </section>
   </main>
+
 
   <footer>
     <p>© 2026 CityExplorer</p>
