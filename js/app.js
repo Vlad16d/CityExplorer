@@ -4,7 +4,9 @@ const cities = [
   { name: "Warszawa", api: "Warsaw,PL", image: "img/warsaw.jpg" },
   { name: "Berlin", api: "Berlin,DE", image: "img/berlin.jpg" },
   { name: "Praga", api: "Prague,CZ", image: "img/prague.jpg" },
-  { name: "Paryż", api: "Paris,FR", image: "img/paris.jpg" }
+  { name: "Paryż", api: "Paris,FR", image: "img/paris.jpg" },
+  { name: "Rzeszów", api: "Rzeszow, PL", image: "img/rzeszow.jpg"},
+  { name: "Mińsk", api: "Minsk, BY", image: "img/minsk.jpg"}
 ];
 
 const citiesList = document.getElementById("cities-list");
@@ -44,3 +46,10 @@ if (citiesList) {
     getWeather(city, card);
   });
 }
+
+const cityCount = document.getElementById("city-count");
+
+if (cityCount) {
+  cityCount.textContent = cities.length;
+}
+
