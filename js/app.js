@@ -1,40 +1,46 @@
 const API_KEY = "494d69bb9bce4e888693a40067a6eec3";
 
 const cities = [
-  { name: "Warszawa", api: "Warsaw,PL" },
-  { name: "Berlin", api: "Berlin,DE" },
-  { name: "Praga", api: "Prague,CZ" },
-  { name: "Paryż", api: "Paris,FR" }
+  { name: "Warszawa", api: "Warsaw,PL", image: "img/warsaw.jpg" },
+  { name: "Berlin", api: "Berlin,DE", image: "img/berlin.jpg" },
+  { name: "Praga", api: "Prague,CZ", image: "img/prague.jpg" },
+  { name: "Paryż", api: "Paris,FR", image: "img/paris.jpg" }
 ];
 
 const citiesList = document.getElementById("cities-list");
 
-async function getWeather(city, element) {
+async function getWeather(city, card) {
   try {
     const res = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${city.api}&appid=${API_KEY}&units=metric&lang=pl`
     );
 
     if (!res.ok) {
-      throw new Error("Błąd pobierania danych");
+      throw new Error("Błąd API");
     }
 
     const data = await res.json();
-    element.textContent = `${city.name}: ${data.main.temp}°C`;
+
+    card.querySelector(".temp").textContent =
+      `${data.main.temp}°C`;
   } catch (error) {
-    element.textContent = `${city.name}: brak danych`;
+    card.querySelector(".temp").textContent = "brak danych";
+    console.error(error);
   }
 }
 
 if (citiesList) {
-  citiesList.innerHTML = "";
-
   cities.forEach(city => {
-    const div = document.createElement("div");
-    div.className = "city";
-    div.textContent = "Ładowanie...";
-    citiesList.appendChild(div);
+    const card = document.createElement("div");
+    card.className = "city-card";
 
-    getWeather(city, div);
+    card.innerHTML = `
+      <img src="${city.image}" alt="${city.name}">
+      <h3>${city.name}</h3>
+      <p class="temp">Ładowanie...</p>
+    `;
+
+    citiesList.appendChild(card);
+    getWeather(city, card);
   });
 }
