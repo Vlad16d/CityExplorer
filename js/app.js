@@ -1,12 +1,18 @@
 const API_KEY = "494d69bb9bce4e888693a40067a6eec3";
 
-const cities = ["Warszawa", "Berlin", "Praga", "Paryż"];
+const cities = [
+  { name: "Warszawa", api: "Warsaw,PL" },
+  { name: "Berlin", api: "Berlin,DE" },
+  { name: "Praga", api: "Prague,CZ" },
+  { name: "Paryż", api: "Paris,FR" }
+];
+
 const citiesList = document.getElementById("cities-list");
 
 async function getWeather(city, element) {
   try {
     const res = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric&lang=pl`
+      `https://api.openweathermap.org/data/2.5/weather?q=${city.api}&appid=${API_KEY}&units=metric&lang=pl`
     );
 
     if (!res.ok) {
@@ -14,9 +20,9 @@ async function getWeather(city, element) {
     }
 
     const data = await res.json();
-    element.textContent = `${city} – ${data.main.temp}°C`;
+    element.textContent = `${city.name}: ${data.main.temp}°C`;
   } catch (error) {
-    element.textContent = `${city} – brak danych`;
+    element.textContent = `${city.name}: brak danych`;
   }
 }
 
